@@ -20,7 +20,8 @@ jobs:
 
       - name: generate docs
         run: |
-          npx redoc-cli bundle docs/sample.yaml
+          cd docs
+          npx redoc-cli bundle sample.yaml
       
       - name: commit generated docs
         run: |
