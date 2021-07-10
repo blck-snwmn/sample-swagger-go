@@ -1,0 +1,55 @@
+swagger: "2.0"
+info:
+  description: "sample"
+  version: "1.0.0"
+  title: "sample"
+host: "sample.io"
+basePath: "/v1"
+tags:
+- name: "sample"
+  description: "Everything about your Pets"
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "https"
+paths:
+  /greet:
+    post:
+      tags:
+      - "sample"
+      summary: "greet"
+      description: "greet user"
+      operationId: "addUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "greet"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            id:
+              type: "integer"
+              format: "int64"
+            username:
+              type: "string"
+      responses:
+        "200":
+          description: "hello"
+        "405":
+          description: "Invalid input"
+          schema:
+            $ref: '#/definitions/ApiErrResponse'
+definitions:
+  ApiErrResponse:
+    type: "object"
+    properties:
+      code:
+        type: "string"
+      message:
+        type: "string"
