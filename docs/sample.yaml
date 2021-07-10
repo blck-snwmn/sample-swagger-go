@@ -19,7 +19,7 @@ paths:
       tags:
       - "sample"
       summary: "greet"
-      description: "greet target user"
+      description: "greet user"
       operationId: "addUser"
       consumes:
       - "application/json"
