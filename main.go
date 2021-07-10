@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	fmt.Println("hello world")
-	returnErr()
+	_ = returnErr()
 }
 
 func returnErr() error {
