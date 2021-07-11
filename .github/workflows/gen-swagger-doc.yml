@@ -30,3 +30,29 @@ jobs:
           git add .
           git commit -m "generate Redoc from swagger.yaml"
           git push origin HEAD:${GITHUB_HEAD_REF}
+
+  generate-go:
+    name: generate Swagger doc
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code directory
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.16'
+
+      - name: generate go
+        run: |
+          . third_party/bin/go-swagger generate model --spec=./docs/sample.yaml
+      
+      - name: commit generated docs
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add .
+          git commit -m "generate Redoc from swagger.yaml"
+          git push origin HEAD:${GITHUB_HEAD_REF}
