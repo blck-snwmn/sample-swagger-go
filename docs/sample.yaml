@@ -6,45 +6,45 @@ info:
 host: "sample.io"
 basePath: "/v1"
 tags:
-- name: "sample"
-  description: "Everything about your Pets"
-  externalDocs:
-    description: "Find out more"
-    url: "http://swagger.io"
+  - name: "sample"
+    description: "Everything about your Pets"
+    externalDocs:
+      description: "Find out more"
+      url: "http://swagger.io"
 schemes:
-- "https"
+  - "https"
 paths:
   /greet:
     post:
       tags:
-      - "sample"
+        - "sample"
       summary: "greet"
-      description: "greet target user"
+      description: "greet user"
       operationId: "addUser"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "greet"
-        required: true
-        schema:
-          type: "object"
-          properties:
-            id:
-              type: "integer"
-              format: "int64"
-            username:
-              type: "string"
+        - in: "body"
+          name: "body"
+          description: "greet"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: "integer"
+                format: "int64"
+              username:
+                type: "string"
       responses:
         "200":
           description: "hello"
         "405":
           description: "Invalid input"
           schema:
-            $ref: '#/definitions/ApiErrResponse'
+            $ref: "#/definitions/ApiErrResponse"
 definitions:
   ApiErrResponse:
     type: "object"

@@ -1,8 +1,8 @@
 name: generate from Swagger.yaml
-on: 
-  pull_request:
+on:
+  push:
     paths:
-      - 'docs/**'
+      - "docs/**"
 jobs:
   generate-docs:
     name: generate from Swagger.yaml
@@ -16,12 +16,12 @@ jobs:
       - name: Set up node(for Redoc)
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: "14"
 
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: '1.16'
+          go-version: "1.16"
       - name: git initialize
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
@@ -31,11 +31,13 @@ jobs:
         run: |
           cd docs
           npx redoc-cli bundle sample.yaml
-      
+
       - name: commit generated docs
         run: |
-          git add .
-          git commit -m "generate Redoc from swagger.yaml"
+          if (git diff --shortstat | grep '[0-9]'); then
+            git add .
+            git commit -m "generate Redoc from swagger.yaml"
+          fi
 
       - name: generate go model
         run: |
@@ -43,9 +45,11 @@ jobs:
 
       - name: commit generated go model
         run: |
-          git add .
-          git commit -m "generate Redoc from go model"
+          if (git diff --shortstat | grep '[0-9]'); then
+            git add .
+            git commit -m "generate Redoc from go model"
+          fi
 
       - name: push
         run: |
-          git push origin HEAD:${GITHUB_HEAD_REF}
+          git push
